@@ -1,0 +1,222 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!-- Left pane -->
+    <div class="col-md-9" id="left-pane">
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <h1 >Welcome Joshua,</h1>
+                <p class="lead">Your devices are under your control.</p>
+                <!-- <p id="currentDate"></p> -->
+                <div class="col-md-12">
+                    
+                    <div class="row">
+                        <p class="h4">Current Consumption</p>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card bg-light" style="max-width: 8rem;">
+                                <div class="card-body text-black">
+                                  <i class="fa fa-superpowers mb-3"></i>
+                                  <p class="card-title fs-5">29kWh</p>
+                                  <p class="card-text text-muted">Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card bg-light" style="max-width: 8rem;">
+                                <div class="card-body text-black">
+                                  <i class="fa fa-superpowers mb-3"></i>
+                                  <p class="card-title fs-5">439kWh</p>
+                                  <p class="card-text text-muted">This Month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pt-4">
+                <!-- <div class="card border-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-body text-primary">
+                      <p class="card-title text-muted">Current Consumption</p>
+                      <p class="card-text fs-5">1,5 kWh</p>
+                    </div>
+                </div> -->
+                <p class="fs-4" id="currentDate"></p>
+                <div class="card mb-3 bg-light" style="max-width: 18rem;">
+                    <div class="card-body text-black">
+                      <p class="card-title text-muted">Humidity</p>
+                      <p class="card-text fs-4">48&period;2 &#37;</p>
+                    </div>
+                </div>
+                <div class="card mb-3 bg-light" style="max-width: 18rem;">
+                    <div class="card-body text-black">
+                      <p class="card-title text-muted">Temperature</p>
+                      <p class="card-text fs-4">68 &deg F</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="row bg-light border rounded-start">
+            <h3 class="text-center">Appliances</h3>
+            <div class="col-6 col-md-4 col-lg-3 text-center">
+                <h5 class="mb-0">Smart Tv</h5>
+                <img class="img-circle" alt="" src="{{ url_for('static', filename='images/smartDevices/smart-tv.png') }}" style="width: 70px; height: 70px;">
+                <p class="mb-0">4 kWh</p>
+                <p class="text-muted mt-0">Active for # hours</p>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 text-center">
+                <h5 class="mb-0">Fridge</h5>
+                <img class="img-circle" alt="" src="{{ url_for('static', filename='images/smartDevices/fridge.png') }}" style="width: 70px; height: 70px;">
+                <p class="mb-0">4 kWh</p>
+                <p class="text-muted mt-0">Active for # hours</p>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 text-center">
+                <h5 class="mb-0">Washing machine</h5>
+                <img class="img-circle" alt="" src="{{ url_for('static', filename='images/smartDevices/laundry.png') }}" style="width: 70px; height: 70px;">
+                <p class="mb-0">4 kWh</p>
+                <p class="text-muted mt-0">Active for # hours</p>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 text-center">
+                <h5 class="mb-0">Microwave</h5>
+                <img class="img-circle" alt="" src="{{ url_for('static', filename='images/smartDevices/microwave-oven.png') }}" style="width: 70px; height: 70px;">
+                <p class="mb-0">4 kWh</p>
+                <p class="text-muted mt-0">Active for # hours</p>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 text-center">
+                <h5 class="mb-0">Lights</h5>
+                <img class="img-circle" alt="" src="{{ url_for('static', filename='images/smartDevices/lightbulb.png') }}" style="width: 70px; height: 70px;">
+                <p class="mb-0">4 kWh</p>
+                <p class="text-muted mt-0">Active for # hours</p>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 text-center">
+                <h5 class="mb-0">Speaker</h5>
+                <img class="img-circle" alt="" src="{{ url_for('static', filename='images/smartDevices/voice-assistant.png') }}" style="width: 70px; height: 70px;">
+                <p class="mb-0">4 kWh</p>
+                <p class="text-muted mt-0">Active for # hours</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <h3>Energy Consumption Trends</h3>
+            <canvas id="energyChart" width="800" height="400"></canvas>
+        </div>
+        
+        <div class="row">
+            <!-- <h3>Consumption history</h3>
+                <div class="col-12">
+                <img class="img-fluid" alt="500x500" src="{{ url_for('static', filename='images/consumptionHistory.png') }}" style="max-width: 70%;">
+            </div> -->
+            <h3>Energy Consumption History</h3>
+            <canvas id="consumptionChart"></canvas>
+        </div>
+        
+        
+    </div>
+    <!-- Right pane -->
+    <aside class="col-md-3 sidebar">
+        <!-- <div class="cr-wkly-consumption">
+            <h3>Weekly Consumption</h3>
+
+        </div>
+        <div class="cr-feedback">
+            Comfortability
+        </div> -->
+        <div class="mb-30"><br></div>
+
+        <div class="row">
+            <!-- <h3>Monthly Analytics</h3>
+            <div class="col-md-6 col-lg-6 mb-3">
+                <div class="card bg-light text-black">
+                    <div class="card-body">
+                        <p class="text-muted">Total Consumption</p>
+                        <p class="card-text">344 kW <br><span>$ 112.5</span></p>
+                    </div>
+                </div>
+            </div>
+    
+            
+            <div class="col-md-6 col-lg-6 mb-3">
+                <div class="card bg-light text-black">
+                    <div class="card-body">
+                        <p class="text-muted">Predicted Consumption</p>
+                        <p class="card-text">344 kW <br><span>$ 112.5</span></p>
+                    </div>
+                </div>
+            </div>
+    
+            
+            <div class="col-md-6 col-lg-6 mb-3">
+                <div class="card bg-light text-black">
+                    <div class="card-body">
+                        <p class="text-muted">Current Consumption</p>
+                        <p class="card-text">344 kW <br><span>$ 112.5</span></p>
+                    </div>
+                </div>
+            </div>
+    
+            
+            <div class="col-md-6 col-lg-6 mb-3">
+                <div class="card border border-dark bg-primary text-white">
+                    <div class="card-body">
+                        <p class="text-muted"><br>Optimisation</p>
+                        <p class="card-text">Good</p>
+                    </div>
+                </div>
+            </div> -->
+
+            <h3>Monthly Analytics</h3>
+            <div class="col-md-6 col-lg-6 mb-3">
+                <div class="card bg-light text-black">
+                    <div class="card-body">
+                        <p class="text-muted mb-0">Predicted this Month</p>
+                        <p class="card-text mt-0">$<span class="fs-4">229</span></p>
+                    </div>
+                </div>
+            </div>
+    
+            
+            <div class="col-md-6 col-lg-6 mb-3">
+                <div class="card bg-light text-black">
+                    <div class="card-body">
+                        <p class="text-muted mb-0">Estimated Savings</p>
+                        <p class="card-text mt-0">$<span class="fs-4">16</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex gap-2 justify-content-center py-0">
+                <div class="card bg-light text-black">
+                    <div class="card-body">
+                        <p class="text-muted mb-0">So Far this<br> Month</p>  <!--↓-->
+                        <p class="card-text mt-0">$<span class="fs-4">122.5</span></p>
+                    </div>
+                </div>
+            </div>           
+            
+            
+
+            <!-- <div class="col-md-6 col-lg-6 mb-3">
+                <div class="card border border-dark bg-primary text-white">
+                    <div class="card-body">
+                        <p class="text-muted mb-0">This <br>Month</p>
+                        <p class="card-text mt-0">$<span class="fs-4">216</span></p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <div>
+            <h3>Recommendations</h3>
+            <ul>
+                <li>Switch off your bathroom light</li>
+                <li>Switch off your water heater <br> <span class="text-muted">Would save you 10W of power</span></li>
+                <li>sss</li>
+                <li>sss</li>
+                <li>sss</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Monthly Expense</h3>
+        </div>
+    </aside>
+{% endblock content %}

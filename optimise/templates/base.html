@@ -15,7 +15,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/settingsModal.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-C3PDvnph6wVCkVXs0IwK7WjJgJo+UYKbFYW7Rz4Vwylcg5ejHTF7wB+4iOd36vMm5g4vTnZzVtGDSx2jPrmq2g==" crossorigin="anonymous" />
     
-    <title>Optimise</title>
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Satient</title>
+    {% endif %}
 </head>
 <body>
     <!-- <header class="site-header ml">
@@ -75,6 +79,15 @@
         </div>
 
         <div class="row">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
             <!-- Left pane -->
             <div class="col-md-9" id="left-pane">
                 <!-- <div class=" row page-header jumbotron" id="org-header">

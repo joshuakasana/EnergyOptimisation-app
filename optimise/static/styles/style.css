@@ -3,7 +3,7 @@ body {
     /* background: linear-gradient(-90deg, #FDBB2D 30%, #22C1C3 70%); */
     /* background: linear-gradient(180deg, #f8ff00 10%, #3ad59f 100%); */
     /* blur(4px); */
-    background-color: gray;
+    background-color: lightgreen;
 }
 #main-overall{
     /* background: rgb(34,193,195);
@@ -12,7 +12,8 @@ body {
     background-color: white;
     /* background: linear-gradient(0deg, rgba(214, 200, 200, 0.56) 0%, rgba(253,187,45,1) 100%); */
     border-radius: 20px;
-    margin-top: 70px;
+    margin-top: 20px;
+    padding-left: 20px;
 }
 
 #left-pane {
@@ -49,4 +50,17 @@ aside {
     font-weight: bold;
     text-decoration: none;
     margin-top: -15px;
+}
+
+#login-page {
+    padding: 20px;
+}
+
+#mock {
+    padding: 25px;
+}
+
+#mock img {
+    width: 50px;
+    height: fit-content;
 }

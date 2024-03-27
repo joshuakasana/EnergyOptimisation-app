@@ -1,10 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var currentDateElement = document.getElementById('currentDate');
-    var currentDate = new Date();
+    var currentDateTimeElement = document.getElementById('currentDate');
+    
+    function updateDateTime() {
+        var currentDate = new Date();
 
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    var formattedDate = currentDate.toLocaleDateString('en-US', options);
+        var optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        var formattedDate = currentDate.toLocaleDateString('en-US', optionsDate);
 
-    // currentDateElement.textContent = 'Today is: ' + formattedDate;
-    currentDateElement.textContent = formattedDate;
+        var optionsTime = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        var formattedTime = currentDate.toLocaleTimeString('en-US', optionsTime);
+
+        // currentDateTimeElement.textContent = 'Today is: ' + formattedDate + ', ' + formattedTime;
+        currentDateTimeElement.textContent = formattedDate + ', ' + formattedTime;
+    }
+
+    // Call updateDateTime function immediately to display initial time
+    updateDateTime();
+
+    // Update time every second
+    setInterval(updateDateTime, 1000);
 });

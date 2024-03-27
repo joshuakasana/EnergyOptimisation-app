@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 # from flask_wtf.file import FileField, FileAllowed
 # from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, validators
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 # from flaskblog.models import User
 
@@ -22,4 +22,8 @@ class LoginForm(FlaskForm):
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+    submit = SubmitField('Sign in')
+
+class changeExpenseBudget(FlaskForm):
+    expense_budget = IntegerField('Expense Budget', validators=[DataRequired()])
+    submit = SubmitField('Submit')

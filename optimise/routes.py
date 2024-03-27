@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, flash
 from optimise import app
-from optimise.forms import RegistrationForm, LoginForm
+from optimise.forms import RegistrationForm, LoginForm, changeExpenseBudget
 # from optimise.models import User
 
 
@@ -10,9 +10,13 @@ from optimise.forms import RegistrationForm, LoginForm
 def base():
     return render_template('base.html')
 
-@app.route("/home")
+@app.route("/home", methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    form = changeExpenseBudget()
+    if form.validate_on_submit():
+        flash(f'Expense Budget updated successfully!', 'success')
+        return redirect(url_for('home'))
+    return render_template('home.html', title='Action Center', form=form)
 
 
 @app.route("/register", methods=['GET', 'POST'])

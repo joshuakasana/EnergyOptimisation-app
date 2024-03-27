@@ -21,7 +21,7 @@ body {
     padding-top: 40px;
 }
 
-aside {
+aside, #aside {
     background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
     background: linear-gradient(90deg, rgba(227, 255, 231, 0.3) 0%, rgba(217, 231, 255, 0.3) 100%);
     /* background-color: rgba(0, 0, 255, 0.367); */
@@ -31,6 +31,8 @@ aside {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+
+
 
 .card{
     border-radius: 20px;

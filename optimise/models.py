@@ -31,7 +31,8 @@ class Stats(db.Model):
     humidity = db.Column(db.Float)
     light = db.Column(db.Float)
     current = db.Column(db.Float)
-    current_prediction = db.Column(db.Float)
+    energy = db.Column(db.Float)
+    energy_prediction = db.Column(db.Float)
 
     def __repr__(self):
         return f"Stats('{self.device_id}', '{self.date}')"

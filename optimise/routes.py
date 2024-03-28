@@ -18,7 +18,7 @@ def base():
 @app.route("/home", methods=['GET', 'POST'])
 @login_required
 def home():
-    first_name = current_user.username
+    first_name = current_user.first_name
     budget = current_user.budget
 
     form = changeExpenseBudget()
@@ -32,6 +32,7 @@ def home():
 
 
 @app.route('/get_current_data', methods=['GET'])
+@login_required
 def get_current_data():
     # Query the database for the latest temperature and humidity data
     stat = Stats.query.filter_by(user_id=current_user.id).order_by(Stats.date.desc()).first()
@@ -52,6 +53,7 @@ def get_current_data():
 
 
 @app.route('/get_energy_consumption', methods=['GET'])
+@login_required
 def get_energy_consumption():
 
     # Get the current datetime
@@ -96,6 +98,7 @@ def get_energy_consumption():
     })
 
 @app.route('/get_energy_data', methods=['GET'])
+@login_required
 def get_energy_data():
     # Query the Stats table for energy and predicted energy data
     stats = Stats.query.filter_by(user_id=current_user.id).order_by(Stats.date.desc()).limit(100).all()

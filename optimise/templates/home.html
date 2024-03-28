@@ -9,7 +9,7 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-bottom">
             <div class="col-md-4 d-flex align-items-center">
                 <h2 class="pb-2 mb-2 ">
-                    Welcome Joshua
+                    Welcome {{ first_name }}
                 </h2>
             </div>
             <div class="fs-4" id="currentDate"></div>
@@ -75,7 +75,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <p class="card-text mt-0">$<span class="fs-4">16</span></p>
+                                    <p class="card-text mt-0">$<span class="fs-4">{{ budget }}</span></p>
                                     
                                 </div>
                             </div>
@@ -196,18 +196,36 @@
         <!-- Right pane -->
         <div class="col-md-3 sidebar" id="aside">
             <div class="position-sticky" style="top: 2rem;">
-                <div class="card mb-3 bg-primary" style="max-width: 14rem;">
-                    <div class="card-body text-black">
-                      <p class="card-title text-muted">Humidity</p>
-                      <p class="card-text fs-4">48&period;2 &#37;</p>
+                {% if humidity < 30 %}
+                    <div class="card mhumidityb-3 bg-danger" style="max-width: 14rem;">
+                {% elif humidity >= 30 and humidity <= 60 %}
+                    <div class="card mb-3 bg-success" style="max-width: 14rem;">
+                {% else %}
+                    <div class="card mb-3 bg-info" style="max-width: 14rem;">
+                {% endif %}
+                        <div class="card-body text-black">
+                        <p class="card-title text-muted">Humidity</p>
+                        <p class="card-text fs-4">{{ humidity }} &#37;</p>
+                        </div>
                     </div>
-                </div>
-                <div class="card mb-3 bg-warning" style="max-width: 14rem;">
-                    <div class="card-body text-black">
-                      <p class="card-title text-muted">Temperature</p>
-                      <p class="card-text fs-4">68 &deg F</p>
+
+                {% if temperature < 13 %}
+                    <div class="card mb-3 bg-primary" style="max-width: 14rem;">
+                {% elif temperature >= 13 and temperature <= 18 %}
+                    <div class="card mb-3 bg-info" style="max-width: 14rem;">
+                {% elif temperature >= 19 and temperature <= 22 %}
+                    <div class="card mb-3 bg-success" style="max-width: 14rem;">
+                {% elif temperature >= 23 and temperature <= 29 %}
+                    <div class="card mb-3 bg-warning" style="max-width: 14rem;">
+                {% else %}
+                    <div class="card mb-3 bg-danger" style="max-width: 14rem;">
+                {% endif %}
+                        <div class="card-body text-black">
+                            <p class="card-title text-muted">Temperature</p>
+                            <p class="card-text fs-4">{{ temperature }} &deg F</p>
+                        </div>
                     </div>
-                </div>
+                
                 <div>
                     <h3>Recommendations</h3>
                     <ul>
@@ -219,9 +237,9 @@
                     </ul>
                 </div>
 
-                <div>
+                <!-- <div>
                     <h3>Monthly Expense</h3>
-                </div>
+                </div> -->
             </div>
         </div>
     <!-- </div> -->

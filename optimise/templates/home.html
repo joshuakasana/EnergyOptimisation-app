@@ -18,9 +18,6 @@
         
         <!-- Left pane -->
         <div class="col-md-9 pl-8">
-            <!-- <h1 class="pb-4 mb-4 border-bottom">
-                Welcome Joshua
-            </h1> -->
 
             <div class="row mb-2">
                 <div class="col-md-6">
@@ -32,7 +29,7 @@
                             <div class="card bg-light" style="max-width: 8rem;">
                                 <div class="card-body text-black">
                                     <i class="fa fa-superpowers mb-3"></i>
-                                    <p class="card-title fs-5">29kWh</p>
+                                    <p class="card-title fs-5" id="average-energy-yesterday">____</p>
                                     <p class="card-text text-muted">Today</p>
                                 </div>
                             </div>
@@ -41,7 +38,7 @@
                             <div class="card bg-light" style="max-width: 8rem;">
                                 <div class="card-body text-black">
                                     <i class="fa fa-superpowers mb-3"></i>
-                                    <p class="card-title fs-5">439kWh</p>
+                                    <p class="card-title fs-5" id="average-energy-today">____</p>
                                     <p class="card-text text-muted">Yesterday</p>
                                 </div>
                             </div>
@@ -140,7 +137,8 @@
 
             <div class="row">
                 <h3>Energy Consumption History</h3>
-                <canvas id="consumptionChart"></canvas>
+                <!-- <canvas id="consumptionChart"></canvas> -->
+                <div id="energy-plot"></div>
             </div>
             
 
@@ -196,35 +194,19 @@
         <!-- Right pane -->
         <div class="col-md-3 sidebar" id="aside">
             <div class="position-sticky" style="top: 2rem;">
-                {% if humidity < 30 %}
-                    <div class="card mhumidityb-3 bg-danger" style="max-width: 14rem;">
-                {% elif humidity >= 30 and humidity <= 60 %}
-                    <div class="card mb-3 bg-success" style="max-width: 14rem;">
-                {% else %}
-                    <div class="card mb-3 bg-info" style="max-width: 14rem;">
-                {% endif %}
-                        <div class="card-body text-black">
+                <div class="card mb-3" id="humidity-card" style="max-width: 14rem;">
+                    <div class="card-body text-black">
                         <p class="card-title text-muted">Humidity</p>
-                        <p class="card-text fs-4">{{ humidity }} &#37;</p>
-                        </div>
+                        <p class="card-text fs-4" id="current-humidity">Loading...</p>
                     </div>
-
-                {% if temperature < 13 %}
-                    <div class="card mb-3 bg-primary" style="max-width: 14rem;">
-                {% elif temperature >= 13 and temperature <= 18 %}
-                    <div class="card mb-3 bg-info" style="max-width: 14rem;">
-                {% elif temperature >= 19 and temperature <= 22 %}
-                    <div class="card mb-3 bg-success" style="max-width: 14rem;">
-                {% elif temperature >= 23 and temperature <= 29 %}
-                    <div class="card mb-3 bg-warning" style="max-width: 14rem;">
-                {% else %}
-                    <div class="card mb-3 bg-danger" style="max-width: 14rem;">
-                {% endif %}
-                        <div class="card-body text-black">
-                            <p class="card-title text-muted">Temperature</p>
-                            <p class="card-text fs-4">{{ temperature }} &deg F</p>
-                        </div>
+                </div>
+                
+                <div class="card mb-3" id="temperature-card" style="max-width: 14rem;">
+                    <div class="card-body text-black">
+                        <p class="card-title text-muted">Temperature</p>
+                        <p class="card-text fs-4" id="current-temperature">Loading...</p>
                     </div>
+                </div>
                 
                 <div>
                     <h3>Recommendations</h3>

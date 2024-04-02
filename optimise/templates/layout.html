@@ -32,17 +32,17 @@
                 </a>
             </div>
     
-            <!-- <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="{{ url_for('base') }}" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2">Features</a></li>
-                <li><a href="#" class="nav-link px-2">Pricing</a></li>
+                <li><a href="{{ url_for('home') }}" class="nav-link px-2">Action Center</a></li>
+                <!-- <li><a href="#" class="nav-link px-2">Pricing</a></li>
                 <li><a href="#" class="nav-link px-2">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2">About</a></li>
-            </ul> -->
+                <li><a href="#" class="nav-link px-2">About</a></li> -->
+            </ul>
     
             <div class="col-md-3 text-end">
                 {% if current_user.is_authenticated %}
-                    <div class="dropdown text-end">
+                    <div class="dropdown open text-end">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ url_for('static', filename='images/funnyCat.jpg') }}" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
@@ -60,14 +60,7 @@
                     <button type="button" class="btn btn-primary">
                         <a class="nav-item nav-link" href="{{ url_for('register') }}">Sign Up</a></a>
                     </button>
-                {% endif %}
-                <!-- <button type="button" class="btn btn-outline-primary me-2">
-                    <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                </button>
-                <button type="button" class="btn btn-primary">
-                    <a class="nav-item nav-link" href="{{ url_for('register') }}">Sign Up</a></a>
-                </button> -->
-            
+                {% endif %}            
             </div>
         </header>
       </div>

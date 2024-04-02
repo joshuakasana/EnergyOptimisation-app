@@ -2,6 +2,7 @@ from datetime import datetime
 from optimise import db, login_manager
 from flask_login import UserMixin
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -16,6 +17,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=True, default='funnyCat.jpg')
     password = db.Column(db.String(60), nullable=False)
     budget = db.Column(db.Float, nullable=False, default=1)
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     stats = db.relationship('Stats', backref='user', lazy=True)
 
@@ -29,7 +31,8 @@ class Stats(db.Model):
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     temperature = db.Column(db.Float)
     humidity = db.Column(db.Float)
-    light = db.Column(db.Float)
+    light = db.Column(db.Boolean, default=False)
+    motion = db.Column(db.Boolean, default=False)
     current = db.Column(db.Float)
     energy = db.Column(db.Float)
     energy_prediction = db.Column(db.Float)

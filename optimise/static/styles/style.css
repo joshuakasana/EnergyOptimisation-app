@@ -66,3 +66,7 @@ aside, #aside {
     width: 50px;
     height: fit-content;
 }
+
+.dropdown-menu {
+    transform: translate(220px, 34px) !important;
+}

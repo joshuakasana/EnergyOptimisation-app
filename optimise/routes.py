@@ -1,11 +1,47 @@
 from datetime import datetime, timedelta
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, jsonify, abort
 from sqlalchemy import func
 from optimise import app, db, bcrypt
 from optimise.forms import RegistrationForm, LoginForm, changeExpenseBudget
 from optimise.models import User, Stats
 from flask_login import login_user, current_user, logout_user, login_required
-from flask import jsonify
+
+@app.route('/data', methods=['POST'])
+def receive_data():
+    print('Initiated')
+    if not request.json:
+        abort(400, 'Request body must be in JSON format')
+
+    data = request.json
+    required_fields = ['device_id', 'date', 'temperature', 'humidity', 'light', 'motion', 'current', 'energy', 'energy_prediction']
+    for field in required_fields:
+        if field not in data:
+            abort(400, f'Missing required field: {field}')
+
+    # Process and store the received data
+            
+    device_id = data.get('device_id')
+    user = User.query.filter_by(device_id=device_id).first()
+
+    if user:
+        user_id = user.id
+    else:
+        abort(403, 'Unauthorized device')  # Or handle unauthorized device appropriately
+
+    light_value = int(data['light'])  # Convert to integer if necessary
+    light = bool(light_value)  # Convert to boolean
+
+
+    save_data_to_database(data, user_id, light)
+    return jsonify({'message': 'Data received and stored successfully'}), 200
+
+def save_data_to_database(data, user_id, light):
+    stat = Stats(user_id=user_id, device_id=data['device_id'], 
+                 date=data['date'], temperature=data['temperature'], humidity=data['humidity'],
+                 light=light, motion=data['motion'], current=data['current'], energy=data['energy'],
+                 energy_prediction=data['energy_prediction'])
+    db.session.add(stat)
+    db.session.commit()
 
 
 @app.route("/")
@@ -55,7 +91,7 @@ def get_current_data():
 @app.route('/get_energy_consumption', methods=['GET'])
 @login_required
 def get_energy_consumption():
-
+    print('Hello World')
     # Get the current datetime
     current_datetime = datetime.now()
 
